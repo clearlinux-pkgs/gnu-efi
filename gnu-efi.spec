@@ -4,10 +4,10 @@
 #
 %define keepstatic 1
 Name     : gnu-efi
-Version  : 3.0.9
-Release  : 54
-URL      : https://sourceforge.net/projects/gnu-efi/files/gnu-efi-3.0.9.tar.bz2
-Source0  : https://sourceforge.net/projects/gnu-efi/files/gnu-efi-3.0.9.tar.bz2
+Version  : 3.0.15
+Release  : 56
+URL      : https://sourceforge.net/projects/gnu-efi/files/gnu-efi-3.0.15.tar.bz2
+Source0  : https://sourceforge.net/projects/gnu-efi/files/gnu-efi-3.0.15.tar.bz2
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause
@@ -19,32 +19,12 @@ Patch5: weak.patch
 Patch6: 0002-Makefile-add-pkgconfig-generation-code.patch
 
 %description
--------------------------------------------------
-Building EFI Applications Using the GNU Toolchain
--------------------------------------------------
-
-%package dev
-Summary: dev components for the gnu-efi package.
-Group: Development
-Provides: gnu-efi-devel = %{version}-%{release}
-Requires: gnu-efi = %{version}-%{release}
-
-%description dev
-dev components for the gnu-efi package.
-
-
-%package staticdev
-Summary: staticdev components for the gnu-efi package.
-Group: Default
-Requires: gnu-efi-dev = %{version}-%{release}
-
-%description staticdev
-staticdev components for the gnu-efi package.
-
+The files in the "lib" and "inc" subdirectories are using the EFI Application
+Toolkit distributed by Intel at http://developer.intel.com/technology/efi
 
 %prep
-%setup -q -n gnu-efi-3.0.9
-cd %{_builddir}/gnu-efi-3.0.9
+%setup -q -n gnu-efi-3.0.15
+cd %{_builddir}/gnu-efi-3.0.15
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -57,7 +37,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604706098
+export SOURCE_DATE_EPOCH=1672175232
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -67,7 +47,7 @@ make
 
 
 %install
-export SOURCE_DATE_EPOCH=1604706098
+export SOURCE_DATE_EPOCH=1672175232
 rm -rf %{buildroot}
 %make_install
 ## install_append content
@@ -76,59 +56,3 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-/usr/lib64/crt0-efi-x86_64.o
-/usr/lib64/elf_x86_64_efi.lds
-
-%files dev
-%defattr(-,root,root,-)
-/usr/include/efi/efi.h
-/usr/include/efi/efi_nii.h
-/usr/include/efi/efi_pxe.h
-/usr/include/efi/efiapi.h
-/usr/include/efi/eficompiler.h
-/usr/include/efi/eficon.h
-/usr/include/efi/efidebug.h
-/usr/include/efi/efidef.h
-/usr/include/efi/efidevp.h
-/usr/include/efi/efierr.h
-/usr/include/efi/efifs.h
-/usr/include/efi/efigpt.h
-/usr/include/efi/efiip.h
-/usr/include/efi/efilib.h
-/usr/include/efi/efilink.h
-/usr/include/efi/efinet.h
-/usr/include/efi/efipart.h
-/usr/include/efi/efipciio.h
-/usr/include/efi/efipoint.h
-/usr/include/efi/efiprot.h
-/usr/include/efi/efipxebc.h
-/usr/include/efi/efirtlib.h
-/usr/include/efi/efiser.h
-/usr/include/efi/efisetjmp.h
-/usr/include/efi/efishellintf.h
-/usr/include/efi/efishellparm.h
-/usr/include/efi/efistdarg.h
-/usr/include/efi/efitcp.h
-/usr/include/efi/efiudp.h
-/usr/include/efi/efiui.h
-/usr/include/efi/libsmbios.h
-/usr/include/efi/pci22.h
-/usr/include/efi/protocol/adapterdebug.h
-/usr/include/efi/protocol/eficonsplit.h
-/usr/include/efi/protocol/efidbg.h
-/usr/include/efi/protocol/efivar.h
-/usr/include/efi/protocol/intload.h
-/usr/include/efi/protocol/legacyboot.h
-/usr/include/efi/protocol/piflash64.h
-/usr/include/efi/protocol/vgaclass.h
-/usr/include/efi/romload.h
-/usr/include/efi/x86_64/efibind.h
-/usr/include/efi/x86_64/efilibplat.h
-/usr/include/efi/x86_64/efisetjmp_arch.h
-/usr/include/efi/x86_64/pe.h
-/usr/lib64/pkgconfig/gnu-efi.pc
-
-%files staticdev
-%defattr(-,root,root,-)
-/usr/lib64/libefi.a
-/usr/lib64/libgnuefi.a
