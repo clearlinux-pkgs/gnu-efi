@@ -1,8 +1,6 @@
 # This file contains recursive sources that require this package
-acrn-hypervisor
 efitools
 fwupd
-fwupdate
 sbsigntools
 shim
 systemd

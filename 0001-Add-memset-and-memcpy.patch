@@ -1,0 +1,44 @@
+From 4c1771fe9044f9e4932560a305f85b236a0aa841 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Tue, 14 May 2024 12:48:23 -0700
+Subject: [PATCH 1/5] Add memset and memcpy
+
+---
+ lib/x86_64/initplat.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+diff --git a/lib/x86_64/initplat.c b/lib/x86_64/initplat.c
+index 7c887a6..736dd87 100644
+--- a/lib/x86_64/initplat.c
++++ b/lib/x86_64/initplat.c
+@@ -25,3 +25,27 @@ InitializeLibPlatform (
+ {
+ }
+ 
++
++/*
++ * Calls to these functions may be emitted implicitly by GCC even when
++ * -ffreestanding is in effect.
++ */
++void *memset(void *s, int c, __SIZE_TYPE__ n)
++{
++    unsigned char *p = s;
++
++    while (n--)
++        *p++ = c;
++
++    return s;
++}
++
++void *memcpy(void *dest, const void *src, __SIZE_TYPE__ n)
++{
++    unsigned char *p = dest, *q = src;
++
++    while (n--)
++        *p++ = *q++;
++
++    return dest;
++}
+-- 
+2.45.0
+

@@ -1,0 +1,25 @@
+From ed67d977f3f5a189dadbc88fe1b91567dec0c7e1 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Tue, 14 May 2024 12:51:06 -0700
+Subject: [PATCH 2/5] Remove werror flag
+
+---
+ Make.defaults | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Make.defaults b/Make.defaults
+index 0068e31..b643285 100755
+--- a/Make.defaults
++++ b/Make.defaults
+@@ -190,7 +190,7 @@ CFLAGS  += $(ARCH3264) -g -O2 -Wall -Wextra -Werror \
+            -funsigned-char -fshort-wchar -fno-strict-aliasing \
+            -ffreestanding -fno-stack-protector
+ else
+-CFLAGS  += $(ARCH3264) -g -O2 -Wall -Wextra -Wno-pointer-sign -Werror \
++CFLAGS  += $(ARCH3264) -g -O2 -Wall -Wextra -Wno-pointer-sign \
+            -funsigned-char -fshort-wchar -fno-strict-aliasing \
+ 	   -ffreestanding -fno-stack-protector -fno-stack-check \
+            $(if $(findstring gcc,$(CC)),-fno-merge-all-constants,)
+-- 
+2.45.0
+

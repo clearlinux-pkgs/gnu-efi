@@ -1,8 +1,0 @@
---- gnu-efi-3.0/Make.defaults~	2014-08-08 15:27:21.000000000 -0400
-+++ gnu-efi-3.0/Make.defaults	2014-12-10 02:47:15.887163041 -0500
-@@ -122,4 +122,4 @@
-            -fno-merge-constants -ffreestanding -fno-stack-protector       \
-            -fno-stack-check
- ASFLAGS += $(ARCH3264)
--LDFLAGS	+= -nostdlib --warn-common --no-undefined --fatal-warnings
-+LDFLAGS	+= -nostdlib 

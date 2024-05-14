@@ -1,7 +1,7 @@
-From 57caf5e7e0d8b1d8482fff6f471ebe679a7f563a Mon Sep 17 00:00:00 2001
-From: Geoffroy Van Cutsem <geoffroy.vancutsem@intel.com>
-Date: Fri, 13 Sep 2019 12:17:06 -0700
-Subject: [PATCH] Makefile: add pkgconfig generation code
+From 7869c708ede1ea362225a37eb6a7ba2b58ad8825 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Tue, 14 May 2024 12:59:29 -0700
+Subject: [PATCH 5/5] Makefile: add pkgconfig generation code
 
 Add Makefile instructions to generate a pkgconfig file.
 
@@ -10,28 +10,26 @@ included as they are typically needed when using this package but installed in
 different locations by different distributions.
 
 Signed-off-by: Geoffroy Van Cutsem <geoffroy.vancutsem@intel.com>
+Signed-off-by: William Douglas <william.douglas@intel.com>
 ---
- Makefile | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
+ Makefile | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
 diff --git a/Makefile b/Makefile
-index 01d1a01..594aabb 100644
+index e0b3062..c18bc84 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -86,12 +86,29 @@ clean:
- 			$(MAKE) -C $(OBJDIR)/$$d -f $(SRCDIR)/$$d/Makefile SRCDIR=$(SRCDIR)/$$d clean; \
+@@ -89,10 +89,25 @@ clean:
  		fi; \
  	done
-+	rm -f gnu-efi.pc
  
 -install:
 +install: gnu-efi.pc
- 	@for d in $(SUBDIRS); do \
+ 	@set -e ; for d in $(SUBDIRS); do \
  		mkdir -p $(OBJDIR)/$$d; \
  		$(MAKE) -C $(OBJDIR)/$$d -f $(SRCDIR)/$$d/Makefile SRCDIR=$(SRCDIR)/$$d install; done
- 
-+	mkdir -p $(INSTALLROOT)$(LIBDIR)/pkgconfig
-+	$(INSTALL) -m 644 gnu-efi.pc $(INSTALLROOT)$(LIBDIR)/pkgconfig/
++	@mkdir -p $(INSTALLROOT)$(LIBDIR)/pkgconfig
++	@$(INSTALL) -m 644 gnu-efi.pc $(INSTALLROOT)$(LIBDIR)/pkgconfig/
 +
 +gnu-efi.pc:
 +	$(file > gnu-efi.pc,prefix=$(PREFIX))
@@ -45,10 +43,9 @@ index 01d1a01..594aabb 100644
 +	$(file >> gnu-efi.pc,Version: $(VERSION))
 +	$(file >> gnu-efi.pc,Cflags: -I$(PREFIX)/include/efi -I$(PREFIX)/include/efi/protocol -I$(PREFIX)/include/efi/$(ARCH))
 +	$(file >> gnu-efi.pc,Libs: -L$(LIBDIR) -lgnuefi -lefi)
-+
+ 
  .PHONY:	$(SUBDIRS) clean depend
  
- #
 -- 
-2.22.0
+2.45.0
 

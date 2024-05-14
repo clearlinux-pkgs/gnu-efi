@@ -1,0 +1,28 @@
+From 2193e8fa10ea28307e89cc35a9d68abc220dcbfc Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Tue, 14 May 2024 12:52:42 -0700
+Subject: [PATCH 3/5] Update PREFIX and LIBDIR for Clear
+
+---
+ Make.defaults | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Make.defaults b/Make.defaults
+index b643285..454155c 100755
+--- a/Make.defaults
++++ b/Make.defaults
+@@ -58,9 +58,9 @@ is_absolute = $(subst $(call stripped,$(1)),$(empty),$(call unstripped,$(1)))
+ 
+ override INSTALLROOT:=$(if $(call is_absolute,$(INSTALLROOT)),,$(TOPDIR)/)$(INSTALLROOT)
+ 
+-PREFIX       := /usr/local
++PREFIX       := /usr
+ EXEC_PREFIX  := $(PREFIX)
+-LIBDIR 	 := $(EXEC_PREFIX)/lib
++LIBDIR 	 := $(EXEC_PREFIX)/lib64
+ INCLUDEDIR   := $(PREFIX)/include
+ INSTALL	 := install
+ 
+-- 
+2.45.0
+

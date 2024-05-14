@@ -1,8 +1,5 @@
-#build-fix.patch
-#ldflags.patch
-memset.patch
-nowerror.patch
-nolocal.patch
-0001-add-missing-rule-to-makefile.patch
-weak.patch
-0002-Makefile-add-pkgconfig-generation-code.patch
+0001-Add-memset-and-memcpy.patch
+0002-Remove-werror-flag.patch
+0003-Update-PREFIX-and-LIBDIR-for-Clear.patch
+0004-Add-memset-and-memcpy-weak-attr.patch
+0005-Makefile-add-pkgconfig-generation-code.patch
