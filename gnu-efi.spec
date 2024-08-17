@@ -8,7 +8,7 @@
 %define keepstatic 1
 Name     : gnu-efi
 Version  : 3.0.18
-Release  : 67
+Release  : 68
 URL      : https://sourceforge.net/projects/gnu-efi/files/gnu-efi-3.0.18.tar.bz2
 Source0  : https://sourceforge.net/projects/gnu-efi/files/gnu-efi-3.0.18.tar.bz2
 Summary  : EFI development toolkit
